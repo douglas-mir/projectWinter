@@ -7,26 +7,42 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "seller_adress")
-@JsonIgnoreProperties({"hibernateLazyInitializer",})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class SellerAdress implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
-    @Column(nullable = false)
-    private String name;
+    @ManyToOne
+    @Column(nullable = false, name = "produto_id")
+    private Produto produto;
+
+    @ManyToOne
+    @Column(nullable = false, name = "city_id")
+    private City city;
+
+    @ManyToOne
+    @Column(nullable = false, name = "state_id")
+    private State state;
+
+    @ManyToOne
+    @Column(nullable = false, name = "country_id")
+    private Country country;
 
     public SellerAdress() {
     }
 
-    public SellerAdress(Integer id, String name) {
+    public SellerAdress(long id, Produto produto, City city, State state, Country country) {
         this.id = id;
-        this.name = name;
+        this.produto = produto;
+        this.city = city;
+        this.state = state;
+        this.country = country;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -34,11 +50,36 @@ public class SellerAdress implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

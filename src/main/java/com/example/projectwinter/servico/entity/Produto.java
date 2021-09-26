@@ -8,14 +8,14 @@ import java.sql.Timestamp;
 
 
 @Entity
-@Table(name = "produto")
-@JsonIgnoreProperties({"hibernateLazyInitializer",})
+//@Table(name = "produto")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "site_id", nullable = false)
     private Integer siteId;
@@ -65,7 +65,7 @@ public class Produto implements Serializable {
     @Column(name = "seller_contact")
     private String sellerContact;
 
-    public Produto(Integer id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
+    public Produto(long id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
                    Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity, Timestamp startTime, Timestamp stopTime,
                    String condition, String permalink, String sellerContact) {
         this.id = id;
@@ -90,7 +90,7 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

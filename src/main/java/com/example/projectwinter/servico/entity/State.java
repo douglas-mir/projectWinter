@@ -7,18 +7,18 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "state")
-@JsonIgnoreProperties({"hibernateLazyInitializer",})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class State implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
 
-    public State(Integer id, String name) {
+    public State(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -26,7 +26,7 @@ public class State implements Serializable {
     public State() {
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

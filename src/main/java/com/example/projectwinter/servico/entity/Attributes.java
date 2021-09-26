@@ -7,13 +7,13 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "attributes")
-@JsonIgnoreProperties({"hibernateLazyInitializer",})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class Attributes implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private Integer codigo;
@@ -21,20 +21,21 @@ public class Attributes implements Serializable {
     @Column(nullable = false)
     private String name;
 
+    @ManyToOne
     @Column(name = "produto_id", nullable = false)
-    private Integer produtoId;
+    private Produto produto;
 
     public Attributes() {
     }
 
-    public Attributes(Integer id, Integer codigo, String name, Integer produtoId) {
+    public Attributes(long id, Integer codigo, String name, Produto produto) {
         this.id = id;
         this.codigo = codigo;
         this.name = name;
-        this.produtoId = produtoId;
+        this.produto = produto;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -58,11 +59,11 @@ public class Attributes implements Serializable {
         this.name = name;
     }
 
-    public Integer getProdutoId() {
-        return produtoId;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(Integer produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

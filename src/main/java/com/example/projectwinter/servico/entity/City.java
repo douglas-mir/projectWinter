@@ -7,13 +7,13 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "city")
-@JsonIgnoreProperties({"hibernateLazyInitializer",})
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class City implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
@@ -21,12 +21,12 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(Integer id, String name) {
+    public City(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
