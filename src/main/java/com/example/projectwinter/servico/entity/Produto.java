@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 
 
 @Entity
-//@Table(name = "produto")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@Table(name = "produto")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Produto implements Serializable {
 
@@ -20,19 +20,19 @@ public class Produto implements Serializable {
     @Column(name = "site_id", nullable = false)
     private Integer siteId;
 
-    @Column
+    @Column (name = "title")
     private String title;
 
-    @Column(name = "site_id", nullable = false)
+    @Column(name = "id_integracao", nullable = false)
     private Integer idIntegracao;
 
-    @Column
+    @Column (name = "subtitle")
     private String subtitle;
 
     @Column(name = "seller_id", nullable = false)
     private Integer sellerId;
 
-    @Column(nullable = false)
+    @Column(name = "price", nullable = false)
     private Float price;
 
     @Column(name = "base_price", nullable = false)
@@ -41,7 +41,7 @@ public class Produto implements Serializable {
     @Column(name = "original_price")
     private Float originalPrice;
 
-    @Column(name = "currency_id)", nullable = false)
+    @Column(name = "currency_id", nullable = false)
     private String currencyId;
 
     @Column(name = "initial_quantity", nullable = false)
@@ -50,23 +50,23 @@ public class Produto implements Serializable {
     @Column(name = "available_quantity", nullable = false)
     private Integer availableQuantity;
 
-    @Column(name = "start_time", nullable = false)
-    private Timestamp startTime;
+//    @Column(name = "start_time", nullable = false)
+//    private Timestamp startTime;
+//
+//    @Column(name = "stop_time", nullable = false)
+//    private Timestamp stopTime;
 
-    @Column(name = "stop_time", nullable = false)
-    private Timestamp stopTime;
-
-    @Column(nullable = false)
+    @Column(name = "conditional", nullable = false)
     private String condition;
 
-    @Column(nullable = false)
+    @Column(name = "permalink", nullable = false)
     private String permalink;
 
     @Column(name = "seller_contact")
     private String sellerContact;
 
     public Produto(long id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
-                   Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity, Timestamp startTime, Timestamp stopTime,
+                   Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity,
                    String condition, String permalink, String sellerContact) {
         this.id = id;
         this.siteId = siteId;
@@ -80,8 +80,8 @@ public class Produto implements Serializable {
         this.currencyId = currencyId;
         this.initialQuantity = initialQuantity;
         this.availableQuantity = availableQuantity;
-        this.startTime = startTime;
-        this.stopTime = stopTime;
+//        this.startTime = startTime;
+//        this.stopTime = stopTime;
         this.condition = condition;
         this.permalink = permalink;
         this.sellerContact = sellerContact;
@@ -186,21 +186,21 @@ public class Produto implements Serializable {
         this.availableQuantity = availableQuantity;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
-
-    public Timestamp getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(Timestamp stopTime) {
-        this.stopTime = stopTime;
-    }
+//    public Timestamp getStartTime() {
+//        return startTime;
+//    }
+//
+//    public void setStartTime(Timestamp startTime) {
+//        this.startTime = startTime;
+//    }
+//
+//    public Timestamp getStopTime() {
+//        return stopTime;
+//    }
+//
+//    public void setStopTime(Timestamp stopTime) {
+//        this.stopTime = stopTime;
+//    }
 
     public String getCondition() {
         return condition;
