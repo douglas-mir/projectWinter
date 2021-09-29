@@ -1,13 +1,9 @@
 package com.example.projectwinter.servico.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -87,6 +83,13 @@ public class Produto implements Serializable {
     @JsonProperty("seller_contact")
     @Column(name = "seller_contact")
     private String sellerContact;
+
+    @OneToMany(mappedBy = "produto")
+    private List<Attributes> atributos;
+
+    @OneToMany(mappedBy = "produto")
+    private List<SellerAdress> sellerAdresses;
+
 
     public Produto(int id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
                    Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity,
@@ -247,6 +250,22 @@ public class Produto implements Serializable {
 
     public void setSellerContact(String sellerContact) {
         this.sellerContact = sellerContact;
+    }
+
+    public List<Attributes> getAtributos() {
+        return atributos;
+    }
+
+    public void setAtributos(List<Attributes> atributos) {
+        this.atributos = atributos;
+    }
+
+    public List<SellerAdress> getSellerAdresses() {
+        return sellerAdresses;
+    }
+
+    public void setSellerAdresses(List<SellerAdress> sellerAdresses) {
+        this.sellerAdresses = sellerAdresses;
     }
 
 
