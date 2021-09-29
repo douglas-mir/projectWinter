@@ -36,7 +36,7 @@ public class ProdutoResource {
 //    }
 
     @PostMapping
-    public Produto incluir(@RequestBody Produto produto){
+    public Produto incluir(@RequestBody(required = false) Produto produto){
         return produtoService.save(produto);
     }
 }

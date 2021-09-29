@@ -1,52 +1,72 @@
 package com.example.projectwinter.servico.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
-@Table(name = "produto")
+@Table(name = "tb_produto")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Produto implements Serializable {
 
+    private static final long serialVersionUID = 2300002659879001344L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @JsonProperty("id")
+    private int id;
 
+    @JsonProperty("site_id")
     @Column(name = "site_id", nullable = false)
     private Integer siteId;
 
+    @JsonProperty("title")
     @Column (name = "title")
     private String title;
 
+    @JsonProperty("id_integracao")
     @Column(name = "id_integracao", nullable = false)
     private Integer idIntegracao;
 
+    @JsonProperty("subtitle")
     @Column (name = "subtitle")
     private String subtitle;
 
+    @JsonProperty("seller_id")
     @Column(name = "seller_id", nullable = false)
     private Integer sellerId;
 
+    @JsonProperty("price")
     @Column(name = "price", nullable = false)
     private Float price;
 
+    @JsonProperty("base_price")
     @Column(name = "base_price", nullable = false)
     private Float basePrice;
 
+    @JsonProperty("original_price")
     @Column(name = "original_price")
     private Float originalPrice;
 
+    @JsonProperty("currency_id")
     @Column(name = "currency_id", nullable = false)
     private String currencyId;
 
+    @JsonProperty("initial_quantity")
     @Column(name = "initial_quantity", nullable = false)
     private Integer initialQuantity;
 
+    @JsonProperty("available_quantity")
     @Column(name = "available_quantity", nullable = false)
     private Integer availableQuantity;
 
@@ -56,16 +76,19 @@ public class Produto implements Serializable {
 //    @Column(name = "stop_time", nullable = false)
 //    private Timestamp stopTime;
 
+    @JsonProperty("condition")
     @Column(name = "conditional", nullable = false)
     private String condition;
 
+    @JsonProperty("permalink")
     @Column(name = "permalink", nullable = false)
     private String permalink;
 
+    @JsonProperty("seller_contact")
     @Column(name = "seller_contact")
     private String sellerContact;
 
-    public Produto(long id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
+    public Produto(int id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
                    Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity,
                    String condition, String permalink, String sellerContact) {
         this.id = id;
@@ -90,11 +113,11 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
