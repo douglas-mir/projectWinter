@@ -1,16 +1,23 @@
 package com.example.projectwinter.servico.entity;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
-@Table(name = "tb_produto")
+@Table(name = "produto")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Produto implements Serializable {
@@ -18,13 +25,16 @@ public class Produto implements Serializable {
     private static final long serialVersionUID = 2300002659879001344L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    private int codigo;
+
     @JsonProperty("id")
-    private int id;
+    @Column
+    private String id;
 
     @JsonProperty("site_id")
     @Column(name = "site_id", nullable = false)
-    private Integer siteId;
+    private String siteId;
 
     @JsonProperty("title")
     @Column (name = "title")
@@ -66,11 +76,13 @@ public class Produto implements Serializable {
     @Column(name = "available_quantity", nullable = false)
     private Integer availableQuantity;
 
-//    @Column(name = "start_time", nullable = false)
-//    private Timestamp startTime;
-//
-//    @Column(name = "stop_time", nullable = false)
-//    private Timestamp stopTime;
+    @JsonProperty("start_time")
+    @Column
+    private OffsetDateTime startTime;
+
+    @JsonProperty("stop_time")
+    @Column
+    private OffsetDateTime stopTime;
 
     @JsonProperty("condition")
     @Column(name = "conditional", nullable = false)
@@ -84,16 +96,22 @@ public class Produto implements Serializable {
     @Column(name = "seller_contact")
     private String sellerContact;
 
-    @OneToMany(mappedBy = "produto")
+    @ManyToMany
+    @JsonProperty("attributes")
     private List<Attributes> atributos;
 
-    @OneToMany(mappedBy = "produto")
-    private List<SellerAdress> sellerAdresses;
+    @ManyToOne
+    @JsonProperty("seller_address")
+    private SellerAdress sellerAdresses;
 
 
-    public Produto(int id, Integer siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId, Float price, Float basePrice,
-                   Float originalPrice, String currencyId, Integer initialQuantity, Integer availableQuantity,
-                   String condition, String permalink, String sellerContact) {
+    public Produto(){}
+
+    public Produto(String id, String siteId, String title, Integer idIntegracao, String subtitle, Integer sellerId,
+                   Float price, Float basePrice, Float originalPrice, String currencyId, Integer initialQuantity,
+                   Integer availableQuantity, OffsetDateTime startTime, OffsetDateTime stopTime, String condition,
+                   String permalink, String sellerContact, List<Attributes> atributos, SellerAdress sellerAdresses) {
+        super();
         this.id = id;
         this.siteId = siteId;
         this.title = title;
@@ -106,29 +124,28 @@ public class Produto implements Serializable {
         this.currencyId = currencyId;
         this.initialQuantity = initialQuantity;
         this.availableQuantity = availableQuantity;
-//        this.startTime = startTime;
-//        this.stopTime = stopTime;
+        this.startTime = startTime;
+        this.stopTime = stopTime;
         this.condition = condition;
         this.permalink = permalink;
         this.sellerContact = sellerContact;
+        this.atributos = atributos;
+        this.sellerAdresses = sellerAdresses;
     }
 
-    public Produto() {
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getSiteId() {
+    public String getSiteId() {
         return siteId;
     }
 
-    public void setSiteId(Integer siteId) {
+    public void setSiteId(String siteId) {
         this.siteId = siteId;
     }
 
@@ -212,22 +229,6 @@ public class Produto implements Serializable {
         this.availableQuantity = availableQuantity;
     }
 
-//    public Timestamp getStartTime() {
-//        return startTime;
-//    }
-//
-//    public void setStartTime(Timestamp startTime) {
-//        this.startTime = startTime;
-//    }
-//
-//    public Timestamp getStopTime() {
-//        return stopTime;
-//    }
-//
-//    public void setStopTime(Timestamp stopTime) {
-//        this.stopTime = stopTime;
-//    }
-
     public String getCondition() {
         return condition;
     }
@@ -260,13 +261,36 @@ public class Produto implements Serializable {
         this.atributos = atributos;
     }
 
-    public List<SellerAdress> getSellerAdresses() {
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public OffsetDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public OffsetDateTime getStopTime() {
+        return stopTime;
+    }
+
+    public void setStopTime(OffsetDateTime stopTime) {
+        this.stopTime = stopTime;
+    }
+
+    public SellerAdress getSellerAdresses() {
         return sellerAdresses;
     }
 
-    public void setSellerAdresses(List<SellerAdress> sellerAdresses) {
+    public void setSellerAdresses(SellerAdress sellerAdresses) {
         this.sellerAdresses = sellerAdresses;
     }
-
 
 }

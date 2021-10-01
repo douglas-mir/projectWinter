@@ -1,54 +1,50 @@
 package com.example.projectwinter.servico.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "attributes")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class Attributes implements Serializable {
 
+    private static final long serialVersionUID = 8900957845874581784L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    private int codigo;
+
+    @JsonProperty("id")
+    @Column
+    private String id;
 
     @Column(nullable = false)
-    private Integer codigo;
-
-    @Column(nullable = false)
+    @JsonProperty("value_name")
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = false)
-    private Produto produto;
 
     public Attributes() {
     }
 
-    public Attributes(long id, Integer codigo, String name, Produto produto) {
+    public Attributes(String id, String name) {
         this.id = id;
-        this.codigo = codigo;
         this.name = name;
-        this.produto = produto;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
     }
 
     public String getName() {
@@ -59,11 +55,12 @@ public class Attributes implements Serializable {
         this.name = name;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
+
 }
