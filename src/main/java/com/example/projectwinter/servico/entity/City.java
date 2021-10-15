@@ -2,12 +2,16 @@ package com.example.projectwinter.servico.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "city")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
@@ -33,32 +37,6 @@ public class City implements Serializable {
     public City(String id, String name) {
         super();
         this.id = id;
-        this.name = name;
-    }
-
-
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 

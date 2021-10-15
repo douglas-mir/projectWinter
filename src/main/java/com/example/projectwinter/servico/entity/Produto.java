@@ -14,8 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 
+@Getter
+@Setter
 @Entity
 @Table(name = "produto")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -133,164 +137,5 @@ public class Produto implements Serializable {
         this.sellerAdresses = sellerAdresses;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSiteId() {
-        return siteId;
-    }
-
-    public void setSiteId(String siteId) {
-        this.siteId = siteId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getIdIntegracao() {
-        return idIntegracao;
-    }
-
-    public void setIdIntegracao(Integer idIntegracao) {
-        this.idIntegracao = idIntegracao;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public Integer getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Integer sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public Float getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(Float basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public Float getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Float originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public String getCurrencyId() {
-        return currencyId;
-    }
-
-    public void setCurrencyId(String currencyId) {
-        this.currencyId = currencyId;
-    }
-
-    public Integer getInitialQuantity() {
-        return initialQuantity;
-    }
-
-    public void setInitialQuantity(Integer initialQuantity) {
-        this.initialQuantity = initialQuantity;
-    }
-
-    public Integer getAvailableQuantity() {
-        return availableQuantity;
-    }
-
-    public void setAvailableQuantity(Integer availableQuantity) {
-        this.availableQuantity = availableQuantity;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public String getPermalink() {
-        return permalink;
-    }
-
-    public void setPermalink(String permalink) {
-        this.permalink = permalink;
-    }
-
-    public String getSellerContact() {
-        return sellerContact;
-    }
-
-    public void setSellerContact(String sellerContact) {
-        this.sellerContact = sellerContact;
-    }
-
-    public List<Attributes> getAtributos() {
-        return atributos;
-    }
-
-    public void setAtributos(List<Attributes> atributos) {
-        this.atributos = atributos;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public OffsetDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(OffsetDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public OffsetDateTime getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(OffsetDateTime stopTime) {
-        this.stopTime = stopTime;
-    }
-
-    public SellerAdress getSellerAdresses() {
-        return sellerAdresses;
-    }
-
-    public void setSellerAdresses(SellerAdress sellerAdresses) {
-        this.sellerAdresses = sellerAdresses;
-    }
 
 }
