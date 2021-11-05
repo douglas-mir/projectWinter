@@ -35,6 +35,7 @@ public class Attributes implements Serializable {
     @JsonProperty("value_name")
     private String name;
 
+
     public Attributes() {
     }
 

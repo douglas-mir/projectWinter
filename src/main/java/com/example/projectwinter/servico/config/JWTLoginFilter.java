@@ -2,6 +2,7 @@ package com.example.projectwinter.servico.config;
 
 
 
+import com.example.projectwinter.servico.entity.UserLogin;
 import com.example.projectwinter.servico.service.TokenAuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,28 +30,28 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-//
-//        UserLogin userLogin = new ObjectMapper()
-//                .readValue(request.getInputStream(), UserLogin.class);
-//
-//        return getAuthenticationManager().authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        userLogin.getUsername(),
-//                        userLogin.getPassword(),
-//                        Collections.emptyList()
-//                )
-//        );
-        return null;
+
+        UserLogin userLogin = new ObjectMapper()
+                .readValue(request.getInputStream(), UserLogin.class);
+
+        return getAuthenticationManager().authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userLogin.getUsername(),
+                        userLogin.getPassword(),
+                        Collections.emptyList()
+                )
+        );
+
     }
 
-//    @Override
-//    protected void successfulAuthentication(
-//            HttpServletRequest request,
-//            HttpServletResponse response,
-//            FilterChain filterChain,
-//            Authentication auth) throws IOException, ServletException {
-//
-//        TokenAuthService.addAuthentication(response, auth.getName());
-//    }
+    @Override
+    protected void successfulAuthentication(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain,
+            Authentication auth) throws IOException, ServletException {
+
+        TokenAuthService.addAuthentication(response, auth.getName());
+    }
 
 }
