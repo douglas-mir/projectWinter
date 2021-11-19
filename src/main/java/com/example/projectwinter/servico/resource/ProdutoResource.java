@@ -83,6 +83,9 @@ public class ProdutoResource {
     @DeleteMapping("/{id}")
     public void excluir(@RequestBody int id){
         Produto produto = produtoRepository.findById(id).get();
+        if(produto.getId() != null){
+
+        }
 
     }
 }

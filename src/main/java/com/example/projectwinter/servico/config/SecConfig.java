@@ -22,7 +22,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
 
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/api/*").authenticated()
+                .antMatchers("/winter/*").authenticated()
                 .and()
 
                 // filtra requisições de login
