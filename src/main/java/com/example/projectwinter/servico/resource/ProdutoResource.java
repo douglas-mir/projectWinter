@@ -81,11 +81,14 @@ public class ProdutoResource {
         return produtoService.save(produto);
     }
     @DeleteMapping("/{id}")
-    public void excluir(@RequestBody int id){
+    public void excluir(@PathVariable("id") int id){
         Produto produto = produtoRepository.findById(id).get();
         if(produto.getId() != null){
-
+            for (Attributes a :produto.getAtributos()) {
+                attributesRepository.delete(a);
+            }
+            produtoRepository.delete(produto);
         }
-
     }
+
 }
