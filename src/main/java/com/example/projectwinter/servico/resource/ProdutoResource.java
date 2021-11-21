@@ -64,9 +64,15 @@ public class ProdutoResource {
         }
 
         if(produto.getSellerAdresses() != null) {
-            City city = cityRepository.save(produto.getSellerAdresses().getCity());
-            State state = stateRepository.save(produto.getSellerAdresses().getState());
-            Country country = countryRepository.save(produto.getSellerAdresses().getCountry());
+            City city = cityRepository.findByName(produto.getSellerAdresses().getCity().getName());
+            if(city == null)
+                city = cityRepository.save(produto.getSellerAdresses().getCity());
+            State state = stateRepository.findByName(produto.getSellerAdresses().getState().getName());
+            if(state == null)
+                state = stateRepository.save(produto.getSellerAdresses().getState());
+            Country country = countryRepository.findByName(produto.getSellerAdresses().getCountry().getName());
+            if(country == null)
+                country = countryRepository.save(produto.getSellerAdresses().getCountry());
 
             produto.getSellerAdresses().setCity(city);
             produto.getSellerAdresses().setState(state);
@@ -80,15 +86,60 @@ public class ProdutoResource {
 
         return produtoService.save(produto);
     }
+
+    @PutMapping
+    public Produto update(@RequestBody Produto produto){
+        Produto edicao = produtoRepository.listById(produto.getId()).get(0);
+        edicao.setSiteId(edicao.getId());
+
+        edicao.setTitle(produto.getTitle());
+        edicao.setIdIntegracao(produto.getIdIntegracao());
+        edicao.setSubtitle(produto.getSubtitle());
+        edicao.setSellerId(produto.getSellerId());
+        edicao.setPrice(produto.getPrice());
+        edicao.setBasePrice(produto.getBasePrice());
+        edicao.setOriginalPrice(produto.getOriginalPrice());
+        edicao.setCurrencyId(produto.getCurrencyId());
+        edicao.setInitialQuantity(produto.getInitialQuantity());
+        edicao.setAvailableQuantity(produto.getAvailableQuantity());
+        edicao.setStartTime(produto.getStartTime());
+        edicao.setStopTime(produto.getStopTime());
+        edicao.setCondition(produto.getCondition());
+        edicao.setPermalink(produto.getPermalink());
+        edicao.setSellerContact(produto.getSellerContact());
+
+        if(produto.getSellerAdresses() != null) {
+            City city = cityRepository.findByName(produto.getSellerAdresses().getCity().getName());
+            if(city == null)
+                city = cityRepository.save(produto.getSellerAdresses().getCity());
+            State state = stateRepository.findByName(produto.getSellerAdresses().getState().getName());
+            if(state == null)
+                state = stateRepository.save(produto.getSellerAdresses().getState());
+            Country country = countryRepository.findByName(produto.getSellerAdresses().getCountry().getName());
+            if(country == null)
+                country = countryRepository.save(produto.getSellerAdresses().getCountry());
+
+            SellerAdress edicaoAdress = sellerRepository.listById(edicao.getSellerAdresses().getId()).get(0);
+
+            edicaoAdress.setCity(city);
+            edicaoAdress.setState(state);
+            edicaoAdress.setCountry(country);
+
+            edicaoAdress = sellerRepository.save(edicaoAdress);
+
+            produto.setSellerAdresses(edicaoAdress);
+        }
+        edicao.getAtributos().clear();
+        edicao.getAtributos().addAll(produto.getAtributos());
+
+        return produtoRepository.save(edicao);
+
+    }
+
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable("id") int id){
         Produto produto = produtoRepository.findById(id).get();
-        if(produto.getId() != null){
-            for (Attributes a :produto.getAtributos()) {
-                attributesRepository.delete(a);
-            }
             produtoRepository.delete(produto);
-        }
     }
 
 }

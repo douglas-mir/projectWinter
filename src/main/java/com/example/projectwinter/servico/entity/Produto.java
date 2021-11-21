@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -100,14 +94,13 @@ public class Produto implements Serializable {
     @Column(name = "seller_contact")
     private String sellerContact;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JsonProperty("attributes")
     private List<Attributes> atributos;
 
     @ManyToOne
     @JsonProperty("seller_address")
     private SellerAdress sellerAdresses;
-
 
     public Produto(){}
 

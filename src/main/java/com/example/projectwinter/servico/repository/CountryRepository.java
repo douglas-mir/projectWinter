@@ -9,4 +9,5 @@ import com.example.projectwinter.servico.entity.Country;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Integer> {
 
+    Country findByName(String name);
 }

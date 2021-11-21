@@ -9,4 +9,5 @@ import com.example.projectwinter.servico.entity.State;
 @Repository
 public interface StateRepository extends JpaRepository<State, Integer> {
 
+    State findByName(String name);
 }
