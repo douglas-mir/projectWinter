@@ -139,7 +139,9 @@ public class ProdutoResource {
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable("id") int id){
         Produto produto = produtoRepository.findById(id).get();
-            produtoRepository.delete(produto);
+        SellerAdress sellerAdress = produto.getSellerAdresses();
+        produtoRepository.delete(produto);
+        sellerRepository.delete(sellerAdress);
     }
 
 }
